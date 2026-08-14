@@ -1,0 +1,1 @@
+{"indexes":[{"collectionGroup":"participants","queryScope":"COLLECTION","fields":[{"fieldPath":"completed","order":"ASCENDING"},{"fieldPath":"score","order":"DESCENDING"},{"fieldPath":"elapsedMs","order":"ASCENDING"}]}],"fieldOverrides":[]}

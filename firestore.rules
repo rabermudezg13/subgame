@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function admin() { return signedIn() && request.auth.token.firebase.sign_in_provider == 'password'; }
+    match /sessions/{sessionId} {
+      allow read: if signedIn();
+      allow write: if admin();
+      match /participants/{participantId} {
+        allow read: if signedIn();
+        allow create: if signedIn()
+          && request.resource.data.ownerUid == request.auth.uid
+          && request.resource.data.keys().hasOnly(['ownerUid','displayName','score','correct','elapsedMs','completed','joinedAt']);
+        allow update: if signedIn()
+          && resource.data.ownerUid == request.auth.uid
+          && request.resource.data.ownerUid == resource.data.ownerUid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['score','correct','elapsedMs','completed','completedAt']);
+        allow delete: if admin();
+      }
+    }
+  }
+}
