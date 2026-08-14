@@ -1,0 +1,3 @@
+.resultsTable div{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.deletePlayer{background:#fff0f0;color:#a62d2d;padding:8px 10px;font-size:.65rem}
+@media(max-width:600px){.resultsTable div{grid-template-columns:1fr auto}.resultsTable div>span{grid-row:2}.deletePlayer{grid-column:2;grid-row:1/3}}
